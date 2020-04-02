@@ -1,0 +1,223 @@
+{
+  "info": {
+    "_postman_id": "36e01d7f-77ba-41eb-a5c5-93843e827857",
+    "name": "schema-registry",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Schema v1",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7361e906-016b-48f7-87f1-788aa7f804b8",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "30978e20-30ad-4def-87c4-5ed4a55d29d3",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "    var jsonData = pm.response.json();",
+              "    postman.setEnvironmentVariable(\"schemaId\", jsonData.id);",
+              "    postman.setEnvironmentVariable(\"schemaVersion\", jsonData.version);",
+              "    postman.setEnvironmentVariable(\"schemaSubject\", jsonData.subject);",
+              "    postman.setEnvironmentVariable(\"schemaFormat\", jsonData.format);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"subject\" : \"employee\",\n\t\"format\" : \"avro\",\n\t\"definition\" : \"{ \\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"Employee\\\", \\\"namespace\\\": \\\"com.example.apacheavro.domain\\\", \\\"fields\\\": [ { \\\"name\\\": \\\"id\\\", \\\"type\\\": \\\"int\\\" }, { \\\"name\\\": \\\"firstName\\\", \\\"type\\\": \\\"string\\\" } ] }\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}",
+          "host": [
+            "{{host}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Schema v2",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7361e906-016b-48f7-87f1-788aa7f804b8",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "30978e20-30ad-4def-87c4-5ed4a55d29d3",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "    var jsonData = pm.response.json();",
+              "    postman.setEnvironmentVariable(\"schemaId\", jsonData.id);",
+              "    postman.setEnvironmentVariable(\"schemaVersion\", jsonData.version);",
+              "    postman.setEnvironmentVariable(\"schemaSubject\", jsonData.subject);",
+              "    postman.setEnvironmentVariable(\"schemaFormat\", jsonData.format);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"subject\" : \"employee\",\n\t\"format\" : \"avro\",\n\t\"definition\" : \"{ \\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"Employee\\\", \\\"namespace\\\": \\\"com.example.apacheavro.domain\\\", \\\"fields\\\": [ { \\\"name\\\": \\\"id\\\", \\\"type\\\": \\\"int\\\" }, { \\\"name\\\": \\\"firstName\\\", \\\"type\\\": \\\"string\\\" }, { \\\"name\\\": \\\"lastName\\\", \\\"type\\\": \\\"string\\\" } ] }\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}",
+          "host": [
+            "{{host}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Schema",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/schemas/{{schemaId}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "schemas",
+            "{{schemaId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Schema from Subject",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/{{schemaSubject}}/{{schemaFormat}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "{{schemaSubject}}",
+            "{{schemaFormat}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Schema from Subject & Version",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/{{schemaSubject}}/{{schemaFormat}}/v{{schemaVersion}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "{{schemaSubject}}",
+            "{{schemaFormat}}",
+            "v{{schemaVersion}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Schema",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/schemas/{{schemaId}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "schemas",
+            "{{schemaId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Schema By Subject",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/{{schemaSubject}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "{{schemaSubject}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Schema By Subject & Version",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/{{schemaSubject}}/{{schemaFormat}}/v{{schemaVersion}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "{{schemaSubject}}",
+            "{{schemaFormat}}",
+            "v{{schemaVersion}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
